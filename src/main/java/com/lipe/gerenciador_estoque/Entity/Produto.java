@@ -1,6 +1,16 @@
 package com.lipe.gerenciador_estoque.Entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class Produto {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String nome;
     private int quantidade;
@@ -11,7 +21,12 @@ public class Produto {
     private String memoria_ram;
     private String armazenamento;
     private double preco;
-    private int id_usuario;
+
+    //Relacionamento muitos produtos para um usuário//
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
+    
     public int getId() {
         return id;
     }
@@ -86,9 +101,5 @@ public class Produto {
 
     public void setPreco(double preco) {
         this.preco = preco;
-    }
-
-    public int getId_usuario() {
-        return id_usuario;
-    }      
+    }   
 }
